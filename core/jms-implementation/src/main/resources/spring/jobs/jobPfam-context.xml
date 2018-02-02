@@ -113,8 +113,11 @@
                     <bean class="uk.ac.ebi.interpro.scan.business.postprocessing.pfam_A.ClanFileParser">
                         <property name="pfamASeedFile" value="${pfam-a.seed.path}"/>
                         <property name="pfamCFile" value="${pfam-clans.path}"/>
+
                     </bean>
                 </property>
+                <property name="pfamHmmDataPath" value="${pfam-a.dat.path}"/>
+
             </bean>
         </property>
         <property name="serialGroup" value="HMMER3_POST_PROCESSING"/>
