@@ -215,7 +215,8 @@ public class PfamHMMER3PostProcessing implements Serializable {
                 //get new regions
                 List<Hmmer3Match.Hmmer3Location.Hmmer3LocationFragment> locationFragments = new ArrayList<>();
                 for (PfamHmmer3RawMatch rawMatch : filteredMatches.getMatches()) {
-                    if (nestedModels.contains(rawMatch.getModelId())) {
+                    if (nestedModels.contains(rawMatch.getModelId()) &&
+                         (matchesOverlap(rawMatch, pfamHmmer3RawMatch))) {
                         locationFragments.add(new Hmmer3Match.Hmmer3Location.Hmmer3LocationFragment(
                                 rawMatch.getLocationStart(), rawMatch.getLocationEnd()));
                     }
@@ -344,13 +345,7 @@ public class PfamHMMER3PostProcessing implements Serializable {
                     }
                     Utilities.verboseLog("Parsed " + lineNumber + " lines .. at line :" + line);
                 }
-                if (lineNumber < 10) {
-                    Utilities.verboseLog("Actual Parsed " + lineNumber + " lines .. at line :" + line);
-                }
-                if (line.startsWith("//")){
-                    Utilities.verboseLog(" Looks like an end of record marker, so expect case No. 4");
 
-                }
                 line = line.trim();
                 // Load the model line by line into a temporary buffer.
                 // TODO - won't break anything, but needs some work.  Need to grab the hmm file header first!
@@ -362,9 +357,6 @@ public class PfamHMMER3PostProcessing implements Serializable {
                 if (line.length() > 0) {
                     int i;
                     for(i = 0; i < gfLineCases.length; i++) {
-                        if (line.startsWith("//") && gfLineCases[i].equals(gfLineCases[4])){
-                            Utilities.verboseLog(" Definitely END of record marker, so expect case No. 4");
-                        }
                         if (line.startsWith(gfLineCases[i])) {
                             break;
                         }
@@ -373,11 +365,9 @@ public class PfamHMMER3PostProcessing implements Serializable {
                     if (line.split("\\s+").length >= 3) {
                         String value = line.split("\\s+")[2];
 
-                        Utilities.verboseLog("accession: " + accession + " id:" +  name + " nestedDomains: "
-                                + nestedDomains +  " case: " + i + " lineL " + line);
-                        if (lineNumber > 20){
-                            break;
-                        }
+//                        Utilities.verboseLog("accession: " + accession + " id:" +  name + " nestedDomains: "
+//                                + nestedDomains +  " case: " + i + " lineL " + line);
+
                         switch (i) {
                             case 0: //"#=GF ID"
                                 if (name == null) {
@@ -399,6 +389,7 @@ public class PfamHMMER3PostProcessing implements Serializable {
                                 }
                                 break;
                             case 4: //"//"
+                                //we shouldnt get here
                                 // Looks like an end of record marker - just to check:
                                 if (accession != null) {
                                     domainNameToAccesstion.put(name, accession);
