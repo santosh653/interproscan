@@ -42,7 +42,7 @@ branches:
   only:
   - dev
   - master
-  - hamap_2019_11
+  - pfam331-tst
   - release-5.43-78.0
   - release-5.43-78.1
   except:
