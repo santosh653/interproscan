@@ -289,6 +289,7 @@ public class WriteOutputStep extends Step {
             }
         }
 
+        printMemoryUsage("Completed printing out results " );
         //close the kvStores
 
         nucleotideSequenceDAO.getDbStore().close();
