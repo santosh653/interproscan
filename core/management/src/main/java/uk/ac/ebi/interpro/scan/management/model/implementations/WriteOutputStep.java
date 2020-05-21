@@ -188,6 +188,9 @@ public class WriteOutputStep extends Step {
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Starting step with Id " + this.getId());
         }
+        System.gc();
+        printMemoryUsage("after GC scheduled at start of WriteOutput");
+
         final Map<String, String> parameters = stepInstance.getParameters();
         final String outputFormatStr = parameters.get(OUTPUT_FILE_FORMATS);
         final Set<FileOutputFormat> outputFormats = FileOutputFormat.stringToFileOutputFormats(outputFormatStr);
