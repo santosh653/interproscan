@@ -497,7 +497,7 @@ public class WriteOutputStep extends Step {
                     //help garbage collection??
                     if (proteinIndex % 20000 == 0){
                         System.gc();
-                        printMemoryUsage("after GC scheduled");
+                        printMemoryUsage("after GC scheduled at "  + proteinIndex + " proteins");
                     }
                     //print one protein then break
                     //break;
@@ -610,7 +610,7 @@ public class WriteOutputStep extends Step {
                         //help garbage collection??
                         if (proteinIndex % 20000 == 0){
                             System.gc();
-                            printMemoryUsage("after GC scheduled");
+                            printMemoryUsage("after GC scheduled at " + proteinIndex + " proteins");
                         }
                     }
                 }
@@ -886,6 +886,10 @@ public class WriteOutputStep extends Step {
                 count++;
                 if (count % 40000 == 0) {
                     Utilities.verboseLog(110, " WriteOutout - wrote out matches for " + count + " proteins");
+                }
+                if (proteinIndex % 20000 == 0){
+                    System.gc();
+                    printMemoryUsage("after GC scheduled at "  + proteinIndex + " proteins");
                 }
             }
         }
