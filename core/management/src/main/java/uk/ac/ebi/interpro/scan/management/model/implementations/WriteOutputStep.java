@@ -188,9 +188,6 @@ public class WriteOutputStep extends Step {
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Starting step with Id " + this.getId());
         }
-        System.gc();
-        printMemoryUsage("after GC scheduled at start of WriteOutput");
-
         final Map<String, String> parameters = stepInstance.getParameters();
         final String outputFormatStr = parameters.get(OUTPUT_FILE_FORMATS);
         final Set<FileOutputFormat> outputFormats = FileOutputFormat.stringToFileOutputFormats(outputFormatStr);
@@ -222,7 +219,7 @@ public class WriteOutputStep extends Step {
             FileOutputFormat outputFormat = FileOutputFormat.XML;
             Path outputPath = getPathName(explicitPath, filePathName, outputFormat);
             try {
-                printMemoryUsage("printing " + outputFormat);
+                Utilities.printMemoryUsage("printing " + outputFormat);
                 Utilities.verboseLog(110, "Writing out " + outputPath.toString());
                 outputToXML(outputPath, stepInstance, sequenceType, false);
             } catch (IOException ioe) {
@@ -238,7 +235,7 @@ public class WriteOutputStep extends Step {
                 if (LOGGER.isInfoEnabled()) {
                     LOGGER.info("Writing out " + outputFormat + " file");
                 }
-                printMemoryUsage("printing " + outputFormat);
+                Utilities.printMemoryUsage("printing " + outputFormat);
                 Utilities.verboseLog(0, " Outputting " + outputFormat);
 
                 switch (outputFormat) {
@@ -293,8 +290,7 @@ public class WriteOutputStep extends Step {
             }
         }
 
-        printMemoryUsage("Completed printing out results " );
-
+        Utilities.printMemoryUsage("Completed pritning out results " );
         //close the kvStores
 
         nucleotideSequenceDAO.getDbStore().close();
@@ -497,7 +493,7 @@ public class WriteOutputStep extends Step {
                     //help garbage collection??
                     if (proteinIndex % 20000 == 0){
                         System.gc();
-                        printMemoryUsage("after GC scheduled at "  + proteinIndex + " proteins");
+                        Utilities.printMemoryUsage("outputToXML:- GC scheduled at "  + proteinIndex + " proteins");
                     }
                     //print one protein then break
                     //break;
@@ -609,8 +605,7 @@ public class WriteOutputStep extends Step {
                         }
                         //help garbage collection??
                         if (proteinIndex % 20000 == 0){
-                            System.gc();
-                            printMemoryUsage("after GC scheduled at " + proteinIndex + " proteins");
+                            Utilities.printMemoryUsage("outputToJSON:  GC scheduled at " + proteinIndex + " proteins");
                         }
                     }
                 }
@@ -888,8 +883,7 @@ public class WriteOutputStep extends Step {
                     Utilities.verboseLog(110, " WriteOutout - wrote out matches for " + count + " proteins");
                 }
                 if (proteinIndex % 20000 == 0){
-                    System.gc();
-                    printMemoryUsage("after GC scheduled at "  + proteinIndex + " proteins");
+                    Utilities.printMemoryUsage("writeProteinMatches: - GC scheduled at "  + proteinIndex + " proteins");
                 }
             }
         }
@@ -952,21 +946,4 @@ public class WriteOutputStep extends Step {
 
     }
 
-    private void printMemoryUsage(String stepName) {
-        int mb = 1024 * 1024;
-
-        //Getting the runtime reference from system
-        Runtime runtime = Runtime.getRuntime();
-
-        System.out.println("##### Heap utilization statistics [MB]  at " + stepName + " #####");
-
-        //Print used memory
-
-        System.out.println("Used Memory:"
-                + (runtime.totalMemory() - runtime.freeMemory()) / mb
-                + "\t Free Memory:"
-                + runtime.freeMemory() / mb
-                + "\t Total Memory:" + runtime.totalMemory() / mb
-                + "\t Max Memory:" + runtime.maxMemory() / mb);
-    }
 }
