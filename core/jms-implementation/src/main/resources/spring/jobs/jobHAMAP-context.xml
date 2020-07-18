@@ -46,8 +46,8 @@
         <property name="fullPathToHmmFile" value="${hamap.hmm.lib.path}"/>
         <property name="usesFileOutputSwitch" value="true"/>
         <property name="useTbloutFormat" value="true"/>
-        <property name="outputFileNameTemplate" ref="rawAnalaysisOutputFileTemplate"/>
-        <property name="outputFileNameTbloutTemplate" ref="rawAnalaysisOutputTbloutFileTemplate"/>
+        <property name="outputFileNameTemplate" ref="rawAnalysisOutputFileTemplate"/>
+        <property name="outputFileNameTbloutTemplate" ref="rawAnalysisOutputTbloutFileTemplate"/>
         <property name="fastaFileNameTemplate" ref="fastaFileNameTemplate"/>
         <property name="retries" value="3"/>
         <property name="requiresDatabaseAccess" value="false"/>
@@ -60,11 +60,11 @@
         <property name="dependsUpon" ref="stepHamapHMMRunHmmer3"/>
         <property name="stepDescription" value="Run pfsearch for selected proteins"/>
         <property name="binarySwitches" value="${pfsearch.hamap.binary.switches}"/>
-        <!--<property name="outputFileNameTemplate" ref="rawAnalaysisOutputOneFileTemplate"/>-->
+        <!--<property name="outputFileNameTemplate" ref="rawAnalysisOutputOneFileTemplate"/>-->
         <!--<property name="fastaFileNameTemplate" ref="filteredFastaInputFileNameTemplate"/>-->
         <property name="fastaFileNameTemplate" ref="fastaFileNameTemplate"/>
-        <property name="outputFileTemplate" ref="rawAnalaysisOutputOneFileTemplate"/>
-        <property name="outputFileNameTbloutTemplate" ref="rawAnalaysisOutputTbloutFileTemplate"/>
+        <property name="outputFileTemplate" ref="rawAnalysisOutputOneFileTemplate"/>
+        <property name="outputFileNameTbloutTemplate" ref="rawAnalysisOutputTbloutFileTemplate"/>
         <property name="statsFileNameTemplate" ref="statsFileNameTemplate"/>
         <property name="retries" value="3"/>
         <property name="fullPathToPFsearch" value="${binary.prosite.pfsearch.path}"/>
@@ -83,7 +83,7 @@
         <property name="stepDescription" value="Parse the output from the ProSite binary"/>
         <property name="serialGroup" value="PARSE_HAMAP"/>
         <property name="retries" value="3"/>
-        <property name="outputFileTemplate" ref="rawAnalaysisOutputOneFileTemplate"/>
+        <property name="outputFileTemplate" ref="rawAnalysisOutputOneFileTemplate"/>
         <property name="rawMatchDAO" ref="hamapRawMatchDAO"/>
         <property name="parser">
             <bean class="uk.ac.ebi.interpro.scan.io.match.prosite.HamapPfsearchMatchParser">
@@ -105,9 +105,9 @@
         <property name="fileNameTemplate">
                   <list>
                     <ref bean="fastaFileNameTemplate"/>
-                    <ref bean="rawAnalaysisOutputTbloutFileTemplate"/>
-                    <ref bean="rawAnalaysisOutputFileTemplate"/>
-                    <ref bean="rawAnalaysisOutputOneFileTemplate"/>
+                    <ref bean="rawAnalysisOutputTbloutFileTemplate"/>
+                    <ref bean="rawAnalysisOutputFileTemplate"/>
+                    <ref bean="rawAnalysisOutputOneFileTemplate"/>
                     <ref bean="statsFileNameTemplate"/>
                   </list>
         </property>

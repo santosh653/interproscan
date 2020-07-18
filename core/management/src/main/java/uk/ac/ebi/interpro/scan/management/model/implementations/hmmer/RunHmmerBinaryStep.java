@@ -200,6 +200,7 @@ public class RunHmmerBinaryStep extends RunBinaryStep {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(command.toString());
         }
+        Utilities.verboseLog(20, command.toString());
 
         return command;
     }
