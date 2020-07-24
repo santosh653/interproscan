@@ -1252,6 +1252,11 @@ public class Run extends AbstractI5Runner {
                 if (possibleUserApplName != null) {
                     userApplName = possibleUserApplName;
                 }
+                Utilities.verboseLog(110, "userApplName: " + userApplName + ", " + userApplVersion);
+                LOGGER.warn("userApplName: " + userApplName + ", " + userApplVersion);
+                if(userApplName.equalsIgnoreCase("smartexp")){
+                    userApplName = "smart";
+                }
                 for (Job job : allJobs.getAnalysisJobs().getJobList()) { // Loop through (not deactivated) analysis jobs
                     SignatureLibraryRelease slr = job.getLibraryRelease();
                     String applName = slr.getLibrary().getName();
@@ -1259,6 +1264,8 @@ public class Run extends AbstractI5Runner {
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("SignatureLibraryRelease: " + applName + ", " + applVersion);
                     }
+                    Utilities.verboseLog(110, "SignatureLibraryRelease: " + applName + ", " + applVersion);
+                    LOGGER.warn("SignatureLibraryRelease: " + applName + ", " + applVersion);
                     if (applName.equalsIgnoreCase(userApplName)) {
                         // This analysis name exists, what about the version?
                         if (userApplVersion == null) {

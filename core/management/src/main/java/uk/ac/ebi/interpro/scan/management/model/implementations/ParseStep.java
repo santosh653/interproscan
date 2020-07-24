@@ -96,6 +96,8 @@ public abstract class ParseStep<T extends RawMatch> extends Step {
                 if (represantiveRawMatch == null) {
                     if (rawProtein.getMatches().size() > 0) {
                         represantiveRawMatch = rawProtein.getMatches().iterator().next();
+                        Utilities.verboseLog(110,represantiveRawMatch.getSignatureLibrary().getName() + " " + represantiveRawMatch.getModelId() + " - "
+                                + represantiveRawMatch.toString());
                     }
                 }
                 if (LOGGER.isDebugEnabled()) {
@@ -104,7 +106,7 @@ public abstract class ParseStep<T extends RawMatch> extends Step {
                         int rmCount = 0;
                         for (RawMatch rawMatch : rawProtein.getMatches()) {
                             rmCount++;
-                            Utilities.verboseLog(represantiveRawMatch.getSignatureLibrary().getName() + " " + rmCount + " "
+                            Utilities.verboseLog(110,represantiveRawMatch.getSignatureLibrary().getName() + " " + rmCount + " "
                                     + rawMatch.toString());
                         }
                     }
@@ -115,6 +117,9 @@ public abstract class ParseStep<T extends RawMatch> extends Step {
                 LOGGER.debug("Parsed out " + results.size() + " proteins with matches from file " + fileName);
                 LOGGER.debug("A total of " + matchCount + " matches from file " + fileName);
             }
+            Utilities.verboseLog(110,"Parsed out " + results.size() + " proteins with matches from file " + fileName);
+            Utilities.verboseLog(110,"A total of " + matchCount + " matches from file " + fileName);
+
             rawMatchDAO.insertProteinMatches(results);
             Long now = System.currentTimeMillis();
             long chunkSize =  stepInstance.getTopProtein() - stepInstance.getBottomProtein();

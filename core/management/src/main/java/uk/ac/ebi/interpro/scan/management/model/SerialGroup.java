@@ -34,6 +34,7 @@ public enum SerialGroup {
     PARSE_HAMAP,
     PARSE_SFLD,
     PARSE_SMART,
+    PARSE_SMARTEXP,
     PARSE_TIGRFAM,
     PARSE_PANTHER,
     PARSE_PIRSF,
