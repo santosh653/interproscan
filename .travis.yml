@@ -2,13 +2,13 @@ arch:
   - amd64
   - ppc64le
 language: java
-jd\k: openjdk11
+jdk: openjdk11
 python: 3.8
 
 sudo: required
 env:
   matrix:
-  #- OS_TYPE=centos OS_VERSION=7
+  - OS_TYPE=centos OS_VERSION=7
   - OS_TYPE=centos OS_VERSION=8
   - OS_TYPE=ubuntu OS_VERSION=18.04
   - OS_TYPE=ubuntu OS_VERSION=20.04
