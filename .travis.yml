@@ -1,35 +1,17 @@
+arch:
+  - amd64
+  - ppc64le
 language: java
-jdk: openjdk8
+jd\k: openjdk11
 python: 3.8
 
 sudo: required
 env:
   matrix:
-  - OS_TYPE=centos OS_VERSION=7
-    arch: amd64
+  #- OS_TYPE=centos OS_VERSION=7
   - OS_TYPE=centos OS_VERSION=8
-    arch: amd64
-  - OS_TYPE=ubuntu OS_VERSION=xenial
-    arch: amd64
-  - OS_TYPE=ubuntu OS_VERSION=bionic
-    arch: amd64
-  - OS_TYPE=ubuntu OS_VERSION=19.10
-    arch: amd64
+  - OS_TYPE=ubuntu OS_VERSION=18.04
   - OS_TYPE=ubuntu OS_VERSION=20.04
-    arch: amd64
-    
-  - OS_TYPE=centos OS_VERSION=7
-    arch: ppc64le
-  - OS_TYPE=centos OS_VERSION=8
-    arch: ppc64le
-  - OS_TYPE=ubuntu OS_VERSION=xenial
-    arch: ppc64le
-  - OS_TYPE=ubuntu OS_VERSION=bionic
-    arch: ppc64le
-  - OS_TYPE=ubuntu OS_VERSION=19.10
-    arch: ppc64le
-  - OS_TYPE=ubuntu OS_VERSION=20.04
-    arch: ppc64le
   
 services:
   - docker
@@ -62,9 +44,9 @@ before_install:
 
 branches:
   only:
+  - release-5.48-83.0
+  - release-5.50-84.0
   - dev
-  - master
-  - release-5.47-82.0
   except:
   - new_master
 
